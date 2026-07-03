@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="dashboard">
+
+        <h1>Dashboard</h1>
+
+        <p>Welcome to your dashboard!</p>
+
+        <h3 id="welcome"></h3>
+
+        <button class="logout-btn" onclick="logout()">
+            Logout
+        </button>
+
+    </div>
+
+    <script>
+        const loggedIn = localStorage.getItem("loggedIn");
+
+        if (loggedIn !== "true") {
+            alert("Please login first.");
+            window.location.href = "login.html";
+        }
+
+        const user = JSON.parse(localStorage.getItem("user"));
+
+        document.getElementById("welcome").textContent =
+            `Good day, ${user.username}!`;
+
+        function logout() {
+            localStorage.removeItem("loggedIn");
+
+            alert("Logged out successfully!");
+
+            window.location.href = "login.html";
+
+        }
+
+    </script>
+
+</body>
+</html>
