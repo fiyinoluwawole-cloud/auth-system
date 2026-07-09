@@ -22,29 +22,32 @@
 
     </div>
 
-    <script>
-        const loggedIn = localStorage.getItem("loggedIn");
+<script>
+    const loggedIn = localStorage.getItem("loggedIn");
 
-        if (loggedIn !== "true") {
-            alert("Please login first.");
-            window.location.href = "login.html";
-        }
+    if (loggedIn !== "true") {
+        alert("Please login first.");
+        window.location.href = "login.html";
+    }
 
-        const user = JSON.parse(localStorage.getItem("user"));
+    const currentUser = JSON.parse(
+        localStorage.getItem("currentUser")
+    );
 
-        document.getElementById("welcome").textContent =
-            `Good day, ${user.username}!`;
+    document.getElementById("welcome").textContent =
+        `Good day, ${currentUser.username}!`;
 
-        function logout() {
-            localStorage.removeItem("loggedIn");
+    function logout() {
 
-            alert("Logged out successfully!");
+        localStorage.removeItem("loggedIn");
+        localStorage.removeItem("currentUser");
 
-            window.location.href = "login.html";
+        alert("Logged out successfully!");
 
-        }
+        window.location.href = "login.html";
+    }
 
-    </script>
+</script>
 
 </body>
 </html>

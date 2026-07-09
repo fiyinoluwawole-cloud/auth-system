@@ -34,8 +34,8 @@
         const email = document.getElementById("email");
         const password = document.getElementById("password");
 
-
         function signUp() {
+
             if (
                 username.value.trim() === "" ||
                 email.value.trim() === "" ||
@@ -45,13 +45,27 @@
                 return;
             }
 
-            const user = {
-                username: username.value,
-                email: email.value,
+            let users = JSON.parse(localStorage.getItem("users")) || [];
+
+            const existingUser = users.find(
+                user => user.email === email.value.trim()
+            );
+
+            if (existingUser) {
+                alert("This email is already registered. Please login.");
+                window.location.href = "login.html";
+                return;
+            }
+
+            const newUser = {
+                username: username.value.trim(),
+                email: email.value.trim(),
                 password: password.value
             };
 
-            localStorage.setItem("user", JSON.stringify(user));
+            users.push(newUser);
+
+            localStorage.setItem("users", JSON.stringify(users));
 
             alert("Account created successfully!");
 
